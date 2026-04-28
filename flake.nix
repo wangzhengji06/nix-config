@@ -1,58 +1,51 @@
 {
+  description = "NixOS-WSL configuration";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    nixos-wsl,
-    ...
-  }: {
-    nixosConfigurations."home-wsl" = nixpkgs.lib.nixosSystem {
+  outputs = inputs@{ self, nixpkgs, nixos-wsl, home-manager, ... }:
+    let
+      inherit (nixpkgs.lib) nixosSystem genAttrs replaceStrings;
+      inherit (nixpkgs.lib.filesystem) listFilesRecursive;
+
       system = "x86_64-linux";
 
-      specialArgs = {
-        inherit inputs;
-      };
+      nameOf = path:
+        replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString path));
+    in
+    {
+      nixosModules = genAttrs
+        (map nameOf (listFilesRecursive ./modules))
+        (name: import ./modules/${name}.nix);
 
-      modules = [
-        nixos-wsl.nixosModules.default
-        ./hosts/home-wsl/configuration.nix
+      homeModules = genAttrs
+        (map nameOf (listFilesRecursive ./home))
+        (name: import ./home/${name}.nix);
 
-        {
-          nixpkgs.overlays = [
-            (final: prev: {
-              unstable = nixpkgs-unstable.legacyPackages.${prev.system};
-            })
-          ];
-        }
+      nixosConfigurations = {
+        home-wsl = nixosSystem {
+          inherit system;
 
-        home-manager.nixosModules.home-manager
-
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {
+          specialArgs = {
+            nix-config = self;
             inherit inputs;
           };
 
-          home-manager.users.lzabry = import ./home/lzabry.nix;
-        }
-      ];
+          modules = [
+            nixos-wsl.nixosModules.default
+            home-manager.nixosModules.home-manager
+          ] ++ listFilesRecursive ./hosts/home-wsl;
+        };
+      };
+
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
     };
-  };
 }
