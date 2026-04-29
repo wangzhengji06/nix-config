@@ -1,64 +1,55 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
-  programs.nvf = {
+  programs.neovim = {
     enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
 
-    settings.vim = {
-      viAlias = true;
-      vimAlias = true;
+    extraPackages = with pkgs; [
+      # core tools
+      fd
+      ripgrep
+      tree-sitter
+      git
+      gcc
+      gnumake
+      unzip
+      curl
 
-      options = {
-        tabstop = 2;
-        shiftwidth = 2;
-        expandtab = true;
-        number = true;
-        relativenumber = true;
-        ignorecase = true;
-        smartcase = true;
-        scrolloff = 3;
-      };
+      # runtimes
+      nodejs
+      python313
 
-      globals.mapleader = " ";
+      # LSP servers
+      lua-language-server
+      nil
+      basedpyright
+      ruff
+      typescript-language-server
+      vscode-langservers-extracted
+      bash-language-server
+      yaml-language-server
+      dockerfile-language-server-nodejs
+      docker-compose-language-service
+      sqls
 
-      languages = {
-        enableFormat = true;
-        enableTreesitter = true;
-        enableExtraDiagnostics = true;
 
-        nix.enable = true;
-        lua.enable = true;
-        markdown.enable = true;
+      # formatters / linters
+      stylua
+      nixfmt-rfc-style
+      prettier
+      shfmt
+      shellcheck
+      checkmake
 
-        python = {
-          enable = true;
-          lsp.enable = true;
-          format.enable = true;
-        };
-      };
-
-      lsp = {
-        enable = true;
-        formatOnSave = true;
-      };
-
-      autocomplete.nvim-cmp.enable = true;
-
-      telescope.enable = true;
-      git.gitsigns.enable = true;
-      statusline.lualine.enable = true;
-      comments.comment-nvim.enable = true;
-      autopairs.nvim-autopairs.enable = true;
-    };
+      # DAP
+      python313Packages.debugpy
+    ];
   };
 
-  home.packages = with pkgs; [
-    python313
-    ruff
-    pyright
-    ripgrep
-    fd
-  ];
+  xdg.configFile."nvim".source = inputs.dotfiles;
 
   home.sessionVariables = {
     EDITOR = "nvim";

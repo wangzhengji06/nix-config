@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 let
   inherit (lib) mkOption mkIf;
@@ -91,9 +91,11 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
       backupFileExtension = "backup";
+      extraSpecialArgs = {
+        inherit inputs;
+      };
 
       sharedModules = [
-        inputs.nvf.homeManagerModules.default
 
         {
           home = {
