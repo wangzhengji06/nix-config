@@ -17,6 +17,11 @@
          fish_default_key_bindings
       '';
 
+    interactiveShellInit = 
+      ''
+         zoxide init --cmd cd fish | source
+      '';
+
     shellAliases = {
       tree = "eza --all --long --tree";
       mv = "mv -i";
