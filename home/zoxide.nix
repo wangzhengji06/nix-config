@@ -1,6 +1,7 @@
 {
   programs.zoxide = {
     enable = true;
-    enableFishIntegration = true;
+    enablefishintegration = true;
+    enableFzfIntegration = true;
   };
 }
