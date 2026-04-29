@@ -93,6 +93,8 @@ in
       backupFileExtension = "backup";
 
       sharedModules = [
+        inputs.nvf.homeManagerModules.default
+
         {
           home = {
             username = cfg.username;
