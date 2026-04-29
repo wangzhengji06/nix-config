@@ -11,24 +11,28 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-wsl, home-manager, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nixos-wsl,
+      home-manager,
+      ...
+    }:
     let
       inherit (nixpkgs.lib) nixosSystem genAttrs replaceStrings;
       inherit (nixpkgs.lib.filesystem) listFilesRecursive;
 
       system = "x86_64-linux";
 
-      nameOf = path:
-        replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString path));
+      nameOf = path: replaceStrings [ ".nix" ] [ "" ] (baseNameOf (toString path));
     in
     {
-      nixosModules = genAttrs
-        (map nameOf (listFilesRecursive ./modules))
-        (name: import ./modules/${name}.nix);
+      nixosModules = genAttrs (map nameOf (listFilesRecursive ./modules)) (
+        name: import ./modules/${name}.nix
+      );
 
-      homeModules = genAttrs
-        (map nameOf (listFilesRecursive ./home))
-        (name: import ./home/${name}.nix);
+      homeModules = genAttrs (map nameOf (listFilesRecursive ./home)) (name: import ./home/${name}.nix);
 
       nixosConfigurations = {
         home-wsl = nixosSystem {
@@ -42,7 +46,8 @@
           modules = [
             nixos-wsl.nixosModules.default
             home-manager.nixosModules.home-manager
-          ] ++ listFilesRecursive ./hosts/home-wsl;
+          ]
+          ++ listFilesRecursive ./hosts/home-wsl;
         };
       };
 

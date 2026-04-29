@@ -14,6 +14,7 @@ in
       fzf
       git
       ripgrep
+      zoxide
     ];
   };
 }
