@@ -3,4 +3,8 @@
     enable = true;
     enablefishintegration = true;
   };
+
+    options = [
+      "--cmd cd"
+    ];
 }
