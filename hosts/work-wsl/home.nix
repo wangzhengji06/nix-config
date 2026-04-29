@@ -17,5 +17,10 @@ in {
       ripgrep
       zoxide
     ];
+
+  programs.git = {
+    userName = "b-zhengji.a.wang";
+    userEmail = "b-zhengji.a.wang@rakuten.com";
+    };
   };
 }

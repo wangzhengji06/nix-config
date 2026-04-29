@@ -17,5 +17,10 @@ in {
       ripgrep
       zoxide
     ];
+
+  programs.git = {
+    userName = "wangzhengji06";
+    userEmail = "wangzhengji06@gmail.com";
+    };
   };
 }
