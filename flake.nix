@@ -54,7 +54,24 @@
           ]
           ++ listFilesRecursive ./hosts/home-wsl;
         };
+
+        work-wsl = nixosSystem {
+          inherit system;
+
+          specialArgs = {
+            nix-config = self;
+            inherit inputs;
+          };
+
+          modules = [
+            nixos-wsl.nixosModules.default
+            home-manager.nixosModules.home-manager
+          ]
+          ++ listFilesRecursive ./hosts/work-wsl;
+        };
+
       };
+
 
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
     };

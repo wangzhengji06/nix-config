@@ -10,7 +10,7 @@
 
   modules.system = {
     username = "lzabry";
-    hostName = "home-wsl";
+    hostName = "work-wsl";
     timeZone = "Asia/Tokyo";
     defaultLocale = "en_US.UTF-8";
     stateVersion = "25.05";
