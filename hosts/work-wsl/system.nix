@@ -9,7 +9,7 @@
   ];
 
   modules.system = {
-    username = "lzabry";
+    username = "wang";
     hostName = "work-wsl";
     timeZone = "Asia/Tokyo";
     defaultLocale = "en_US.UTF-8";
