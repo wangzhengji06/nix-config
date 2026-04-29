@@ -10,7 +10,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    dotfiles = {
+    wsl-dotfiles = {
       url = "github:wangzhengji06/nix-nvim";
       flake = false;
     };

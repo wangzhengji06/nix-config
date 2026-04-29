@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777460531,
-        "narHash": "sha256-3Jhvtb93ZlQL2frmQnlDK8B2Ozb/FNUAE2QlqbQOrs4=",
-        "owner": "wangzhengji06",
-        "repo": "nix-nvim",
-        "rev": "ef88bd4473e20feaff9b2ca1f215bf28870f235b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "wangzhengji06",
-        "repo": "nix-nvim",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -92,10 +76,26 @@
     },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "wsl-dotfiles": "wsl-dotfiles"
+      }
+    },
+    "wsl-dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777465184,
+        "narHash": "sha256-XLMJ7vZSQPdDyy2n+JQOQiUlJWgKRt7v9k11Yxs9tkk=",
+        "owner": "wangzhengji06",
+        "repo": "nix-nvim",
+        "rev": "5999157c24fa121e9df1eb99fabd6022324c40b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wangzhengji06",
+        "repo": "nix-nvim",
+        "type": "github"
       }
     }
   },

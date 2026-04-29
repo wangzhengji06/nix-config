@@ -49,7 +49,7 @@
     ];
   };
 
-  xdg.configFile."nvim".source = inputs.dotfiles;
+  xdg.configFile."nvim".source = inputs.wsl-dotfiles;
 
   home.sessionVariables = {
     EDITOR = "nvim";

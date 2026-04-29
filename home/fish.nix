@@ -19,6 +19,7 @@
 
     interactiveShellInit = 
       ''
+         fish_add_path --append /mnt/c/Tools
          zoxide init --cmd cd fish | source
       '';
 
