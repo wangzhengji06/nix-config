@@ -85,11 +85,11 @@
     "wsl-dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1777542766,
-        "narHash": "sha256-TG5c+H7U8A5AwloIbcoGjCfAqrADo+gk8QeY18wyNp0=",
+        "lastModified": 1777545273,
+        "narHash": "sha256-7tPrHPNbuKzWrn2y4VdybWtSgo9N4obxOt8suooI0iU=",
         "owner": "wangzhengji06",
         "repo": "nix-nvim",
-        "rev": "cedad32a17f6e5b90308d8fd639cd23c56172cc7",
+        "rev": "2412abb247c8205f2f5f9be0aee86031814d6de8",
         "type": "github"
       },
       "original": {
