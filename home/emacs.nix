@@ -7,7 +7,6 @@
   };
 
   home.packages = with pkgs; [
-    emacs-nox
     ripgrep
     fd
     nil
