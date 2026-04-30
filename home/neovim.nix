@@ -46,6 +46,7 @@
 
       # DAP
       python313Packages.debugpy
+      python313Packages.python-lsp-server
     ];
   };
 
