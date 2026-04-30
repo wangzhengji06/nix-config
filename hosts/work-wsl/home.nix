@@ -8,8 +8,8 @@ in {
   home-manager.users.${username} = {
     imports = with nix-config.homeModules; [
       fish
-      neovim
       tmux
+      neovim
       bat
       eza
       fzf
