@@ -16,6 +16,7 @@ in {
       git
       ripgrep
       zoxide
+      emacs
     ];
 
   programs.git = {
