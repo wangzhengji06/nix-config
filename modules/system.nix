@@ -41,6 +41,10 @@ in
   config = {
     networking.hostName = cfg.hostName;
 
+    services.openssh = {
+      enable = true;
+    };
+
     time.timeZone = cfg.timeZone;
 
     i18n.defaultLocale = cfg.defaultLocale;
