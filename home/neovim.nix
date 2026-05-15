@@ -35,7 +35,6 @@
       docker-compose-language-service
       sqls
 
-
       # formatters / linters
       stylua
       nixfmt-rfc-style
